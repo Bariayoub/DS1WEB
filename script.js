@@ -71,6 +71,7 @@ function lancer(){
 
 function joueurSuivant(){
     
+    document.getElementById('score-'+activeP).textContent  = tab[activeP];
     activeP === 0 ? activeP = 1 : activeP = 0;
 
     document.getElementById('courent-0').textContent = '0';
