@@ -1,6 +1,7 @@
 //BARI Ayoub / GHOUDAN Ayoub / B21
 
-var tempScore, SCORE_MAX=20, activeP, start;
+var tempScore, SCORE_MAX=100, activeP, start;
+var tab = [0,0];
 var newe = document.querySelector(".btn-new");
 var lance = document.querySelector(".btn-lancer");
 var pass = document.querySelector(".btn-passe");
@@ -14,8 +15,8 @@ var nomj1= document.getElementById('nom-1');
 function init() {
     tempScore = 0;
     activeP = 0;
-    SCORE_MAX = 0;
     start = true;
+    tab = [0,0];
 
 
     scorej0.textContent = "0";
@@ -29,16 +30,12 @@ function init() {
     document.querySelector('.panel-joueur-0').classList.remove('actif');
     document.querySelector('.panel-joueur-1').classList.remove('actif');
     document.querySelector('.panel-joueur-0').classList.add('actif');
-
-    //***** */
-    var newee= document.createElement("kk");
-    newee.appendChild(dee);
-
+    dee.style.display='none';
 
 }
 
 function lancer(){
-    var  last = 0;
+    
     if (start) {
         var de1 = Math.floor((Math.random() * 6)+1);
         dee.style.display = 'block';
@@ -48,11 +45,24 @@ function lancer(){
             tempScore += de1;
             console.log(de1);
             document.getElementById('courent-'+activeP).textContent = tempScore;
-            last +=tempScore;
-            console.log("hfgh"+last);
+            tab[activeP] += parseInt(tempScore);
+            console.log(" loll : "+activeP+" tet : "+tab[activeP]);
+             if (tab[activeP] >= SCORE_MAX){
+                document.querySelector('#nom-'+activeP).textContent = 'vainqueur';
+                dee.style.display = 'none';
+                
+                document.querySelector('.panel-joueur-'+activeP).classList.add('vainqueur');
+                document.querySelector('.panel-joueur-'+activeP).classList.remove('actif');
+                document.getElementById('score-'+activeP).textContent  = "100";
+                document.getElementById('courent-'+activeP).textContent = "0";
+                lance.style.display='none';
+                pass.style.display='none';
+                game = false;
+            
+            }
         } else {
 
-            document.getElementById('score-'+activeP).textContent = tempScore;
+            document.getElementById('score-'+activeP).textContent  = tab[activeP];
             joueurSuivant();
             tempScore=0;
         }
@@ -62,7 +72,6 @@ function lancer(){
 function joueurSuivant(){
     
     activeP === 0 ? activeP = 1 : activeP = 0;
-    SCORE_MAX = 0;
 
     document.getElementById('courent-0').textContent = '0';
     document.getElementById('courent-1').textContent = '0';
