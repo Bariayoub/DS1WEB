@@ -19,6 +19,8 @@ function init() {
     tab = [0,0];
 
 
+    lance.style.display='';
+    pass.style.display='';
     scorej0.textContent = "0";
     scorej1.textContent = "0";
     document.getElementById('courent-0').textContent = "0";
@@ -41,12 +43,13 @@ function lancer(){
         dee.style.display = 'block';
         dee.src = 'de-' + de1 + '.png';
 
+        
         if (de1 !== 1 ) {
             tempScore += de1;
             console.log(de1);
             document.getElementById('courent-'+activeP).textContent = tempScore;
             tab[activeP] += parseInt(tempScore);
-            console.log(" loll : "+activeP+" tet : "+tab[activeP]);
+       
              if (tab[activeP] >= SCORE_MAX){
                 document.querySelector('#nom-'+activeP).textContent = 'vainqueur';
                 dee.style.display = 'none';
